@@ -15,6 +15,8 @@ export const MONTHS = [
 
 export function getMonth(date) {
 
+   // console.log("date.getMonth", date.getMonth());
+
   return MONTHS[date.getMonth()];
   
 };

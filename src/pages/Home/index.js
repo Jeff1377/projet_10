@@ -17,7 +17,8 @@ const Page = () => {
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
-  const last = byDateDesc ? byDateDesc[0] : null;
+  // const last = byDateDesc ? byDateDesc[0] : null;
+  const last = byDateDesc ? byDateDesc[byDateDesc.length - 1]  : null;
 
   // console.log("data", data);
 

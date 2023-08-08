@@ -13,28 +13,34 @@ const Slider = () => {
   // console.log("index", index);
 
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < (byDateDesc.length - 1) ? index + 1 : 0),
-      5000
-    );
+    if (byDateDesc) { // Je m'assure que byDateDesc est correctement défini avant d'utiliser la fonction nextCard.
+      setTimeout(
+        () => setIndex(index < (byDateDesc.length - 1) ? index + 1 : 0),
+        5000
+      );
+    }
   };
   useEffect(() => {
 
-      // console.log("useEffect");
+       // console.log("useEffect");
 
   nextCard();
   });
 
-  /*if (byDateDesc) {
-    console.log("byDateDesc-premier élement date", getMonth(new Date(byDateDesc[0].date)));
-  }*/
+  // if (byDateDesc) {
+  //  console.log("byDateDesc-premier élement date", getMonth(new Date(byDateDesc[0].date)));
+  // }
+
+  const handleRadioChange = (radioIdx) => {
+  setIndex(radioIdx);
+  };
 
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
         <>
           <div
-            key={event.title}
+            key={event.id} // {event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -52,10 +58,11 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={radioIdx.id}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx}
+                  onChange={() => handleRadioChange(radioIdx)}
                 />
               ))}
             </div>
